@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="Side.css" />
+</h:head>
+<body>
+	<div class="hero-image">
+		<div class="hero-text">
+			<fieldset>
+				<h2><legend>Register</legend></h2>
+				<div align="left">
+
+					<h:form>
+						<fieldset>
+							Username:<br/>
+							<h:inputText id="userName" value="#{user.userName}" title="" />
+							<br /> Email:<br/>
+							<h:inputText id="Email" value="#{user.email}" title="" />
+							<br /> password:<br/>
+							<h:inputText type="password" id="password" value="#{user.password}" title="" />
+							<br /> <br /> First Name:<br/>
+							<h:inputText id="firstName" value="#{user.firstName}" title="" />
+							<br /> Last Name:<br/>
+							<h:inputText id="lastName" value="#{user.lastName}" title="" />
+							<br />
+							<br />
+
+							<!-- This is a method that looks for a class.method, (model) -->
+							<h:commandButton value="Submit"
+								action="#{userController.onSubmit(user)}" />
+							<h:form>
+								<h:button value="Back" outcome="index.xhtml" />
+							</h:form>
+						</fieldset>
+					</h:form>
+				</div>
+			</fieldset>
+			<h:message for="userName" />
+			<br />
+			<h:message for="Email" />
+			<br />
+			<h:message for="password" />
+			<br />
+			<h:message for="firstName" />
+			<br />
+			<h:message for="lastName" />
+			<br />
+		</div>
+	</div>
+</body>
+</html>

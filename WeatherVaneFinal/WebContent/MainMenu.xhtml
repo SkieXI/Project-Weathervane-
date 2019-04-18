@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title><ui:insert name="title">Main Menu</ui:insert></title>
+
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript"
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<h:outputScript library="js" name="Chart.js" />
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+	<script type="text/javascript">
+	//All of this was from Mark Moot as we were panicking at the last minute and we were hitting our heads for at least 3 hours.
+	function getWeatherData() {
+		$.ajax(
+				{
+				   type: "GET",
+				   url: "/WeatherVane/rest/weather/getalldata",
+				   dataType: "json",
+				   success: function(data)
+				{
+
+				//Display
+				$('#weatherData').dataTable({
+					"responsive" : true,
+					"data" : data,
+					"columns" : [ {
+						"data" : "tempF",
+						"reposonsivePriority" : 1
+					}, {
+						"data" : "tempC",
+						"responsivePriority" : 2
+					}, {
+						"data" : "humidity",
+						"reposonsivePriority" : 3
+					}, {
+						"data" : "pressure",
+						"responsivePriority" : 4
+					}, {
+						"data" : "dateStr",
+						"reposonsivePriority" : 5
+					} ]
+				});
+			},
+
+			error : function(xhr, ajaxOptions, throwError) {
+				alert(xhr.status);
+				alert(throwError);
+			},
+		})
+	}
+
+	$(document).ready(getWeatherData);
+</script>
+<h:outputStylesheet library="css" name="Main.css" />
+</h:head>
+
+<body>
+	<div class="hero-image">
+		<div class="hero-text">
+			Welcome: #{user.userName} #{user.email} <br /> Todays Current
+			Readings
+			<table id="weatherData" width="75%">
+				<thead>
+					<tr>
+						<th><label>TempF</label></th>
+						<th><label>TempC</label></th>
+						<th><label>Humidity</label></th>
+						<th><label>Pressure</label></th>
+						<th><label>Date</label></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+			<div></div>
+			<!-- Loads the Javascript file that creates a line chart for temperatureC. -->
+			<label>TemperatureC Chart</label>
+			<div id="chartTempC_div"></div>
+			<!-- Loads the Javascript file that creates a line chart for temperatureF. -->
+			<label>TemperatureF Chart</label>
+			<div id="chartTempF_div"></div>
+			<!-- Loads the javaScript file that creates a line chart for pressure. -->
+			<label>Pressure Chart</label>
+			<div id="chartPressure_div"></div>
+			<!-- Loads the javaScript file that creates a line chart for humidity. -->
+			<label>Humidity Chart</label>
+			<div id="chartHumidity_div"></div>
+			<div />
+
+			<h:form>
+				<h:button value="Logout" outcome="index.xhtml" />
+			</h:form>
+		</div>
+	</div>
+</body>
+</html>

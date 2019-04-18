@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head><title>Weather Vane Login</title>
+<h:outputStylesheet library="css" name="Side.css" />
+</h:head> 
+<body> 
+<div class="hero-image">
+  <div class="hero-text">
+ <fieldset>
+  <h2><legend>Login</legend></h2>
+  <fieldset>
+<div align="left">
+						<h:form>
+Email:<br />
+							<h:inputText id="Email" value="#{user.email}" title="" />
+							<br />
+Password:<br />
+							<h:inputText id="Password" type="password" value="#{user.password}" title="" />
+							<br />
+							<br />
+							<h:commandButton value="Submit"
+								action="#{userController.login(user)}" />
+							<h:form>
+								<h:button value="Back" outcome="index.xhtml" />
+							</h:form>
+						</h:form>
+					</div>
+</fieldset>
+</fieldset>
+
+<h:message for="Email"/><br/>
+<h:message for="password"/><br/>
+</div>
+</div>
+</body> 
+</html>
